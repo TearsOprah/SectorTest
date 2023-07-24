@@ -92,6 +92,8 @@ class PostStore {
         let comparison = 0;
         if (this.sortBy === 'title') {
           comparison = a[this.sortBy].localeCompare(b[this.sortBy]);
+        } else if (this.sortBy === 'body') { // Исправляем сортировку по столбцу "Описание" (body)
+          comparison = a['body'].localeCompare(b['body']);
         } else {
           comparison = b[this.sortBy] - a[this.sortBy];
         }
