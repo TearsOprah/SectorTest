@@ -21,7 +21,7 @@ const Search = ({ searchTerm, onSearch }) => {
         onChange={handleInputChange}
         placeholder="Поиск"
       />
-      <button className="search__button" onClick={handleSearch}></button>
+      <button className="search__button hovered" onClick={handleSearch}></button>
     </div>
   );
 };

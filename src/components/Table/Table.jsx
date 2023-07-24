@@ -60,13 +60,13 @@ const Table = observer(() => {
         {/* Table header */}
         <thead>
         <tr className="table__header">
-          <th className="table__header-column header-id" onClick={() => handleSortBy('id')}>
+          <th className="table__header-column header-id hovered" onClick={() => handleSortBy('id')}>
             ID {getSortSymbol('id')}
           </th>
-          <th className="table__header-column header-title" onClick={() => handleSortBy('title')}>
+          <th className="table__header-column header-title hovered" onClick={() => handleSortBy('title')}>
             Заголовок {getSortSymbol('title')}
           </th>
-          <th className="table__header-column header-body" onClick={() => handleSortBy('body')}>
+          <th className="table__header-column header-body hovered" onClick={() => handleSortBy('body')}>
             Описание {getSortSymbol('body')}
           </th>
         </tr>
