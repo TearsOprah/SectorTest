@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import './Search.css';
 
 const Search = ({ searchTerm, onSearch }) => {
@@ -12,6 +12,12 @@ const Search = ({ searchTerm, onSearch }) => {
     onSearch(searchValue);
   };
 
+  const handleKeyPress = (event) => {
+    if (event.key === 'Enter') {
+      handleSearch();
+    }
+  };
+
   return (
     <div className="search">
       <input
@@ -19,6 +25,7 @@ const Search = ({ searchTerm, onSearch }) => {
         type="text"
         value={searchValue}
         onChange={handleInputChange}
+        onKeyDown={handleKeyPress}
         placeholder="Поиск"
       />
       <button className="search__button hovered" onClick={handleSearch}></button>
