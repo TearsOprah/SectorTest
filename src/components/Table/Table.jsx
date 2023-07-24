@@ -1,10 +1,23 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { observer } from 'mobx-react';
 import postStore from "../../stores/PostStore.js";
 import TableRow from "../TableRow/TableRow.jsx";
+import './Table.css';
+import {useNavigate, useParams} from "react-router-dom";
 
 const Table = observer(() => {
   const { currentData, sortBy, sortDirection, searchTerm, setSearchTerm, setSortBy, totalPages, currentPage, setCurrentPage } = postStore;
+
+  const { page } = useParams();
+  const navigate = useNavigate();
+
+  console.log(currentPage)
+
+  useEffect(() => {
+    // Устанавливаем текущую страницу из параметра page при первоначальной загрузке компонента
+    const pageNumber = parseInt(page) || 1;
+    postStore.setCurrentPage(pageNumber);
+  }, [page]);
 
   const handleSortBy = (column) => {
     if (sortBy === column) {
@@ -21,17 +34,20 @@ const Table = observer(() => {
 
   const handlePageChange = (page) => {
     postStore.setCurrentPage(page);
+    navigate(`/page/${page}`); // Обновляем адрес при переключении страницы
   };
 
   const handlePrevPage = () => {
     if (currentPage > 1) {
       postStore.setCurrentPage(currentPage - 1);
+      navigate(`/page/${currentPage - 1}`); // Обновляем адрес при переключении страницы
     }
   };
 
   const handleNextPage = () => {
     if (currentPage < totalPages) {
       postStore.setCurrentPage(currentPage + 1);
+      navigate(`/page/${currentPage + 1}`); // Обновляем адрес при переключении страницы
     }
   };
 
@@ -81,7 +97,7 @@ const Table = observer(() => {
         {Array.from({ length: totalPages }, (_, index) => (
           <button
             key={index + 1}
-            className={currentPage === index + 1 ? 'active' : ''}
+            className={currentPage === index + 1 ? 'button_active' : ''}
             onClick={() => handlePageChange(index + 1)}
           >
             {index + 1}
