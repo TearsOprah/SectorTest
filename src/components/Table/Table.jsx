@@ -50,32 +50,40 @@ const Table = observer(() => {
   // Заполняем массив currentData пустыми объектами, чтобы всегда отображать 10 строк
   const filledData = Array.from({ length: 10 }, (_, index) => currentData[index] || {});
 
-
   return (
     <>
       <Search searchTerm={searchTerm} onSearch={handleSearch} />
-      <table className="table">
-        {/* Table header */}
-        <thead>
-        <tr className="table__header">
-          <th className="table__header-column header-id hovered" onClick={() => handleSortBy('id')}>
-            ID {getSortSymbol('id')}
-          </th>
-          <th className="table__header-column header-title hovered" onClick={() => handleSortBy('title')}>
-            Заголовок {getSortSymbol('title')}
-          </th>
-          <th className="table__header-column header-body hovered" onClick={() => handleSortBy('body')}>
-            Описание {getSortSymbol('body')}
-          </th>
-        </tr>
-        </thead>
-        {/* Table body */}
-        <tbody className='table__body'>
-        {filledData.map((post, index) => (
-          <TableRow key={index} post={post} />
-        ))}
-        </tbody>
-      </table>
+      {
+        currentData.length >= 1 ?
+          <table className="table">
+            {/* Table header */}
+            <thead>
+            <tr className="table__header">
+              <th className="table__header-column header-id hovered" onClick={() => handleSortBy('id')}>
+                ID {getSortSymbol('id')}
+              </th>
+              <th className="table__header-column header-title hovered" onClick={() => handleSortBy('title')}>
+                Заголовок {getSortSymbol('title')}
+              </th>
+              <th className="table__header-column header-body hovered" onClick={() => handleSortBy('body')}>
+                Описание {getSortSymbol('body')}
+              </th>
+            </tr>
+            </thead>
+            {/* Table body */}
+            <tbody className='table__body'>
+            {filledData.map((post, index) => (
+              <TableRow key={index} post={post} />
+            ))}
+            </tbody>
+          </table>
+          :
+          <div className={'no-matches-block'}>
+            <p className={'no-matches-block__title'}>Совпадений не найдено</p>
+            <a className={'no-matches-block__link hovered'} href={'/'}>Назад</a>
+          </div>
+      }
+
       {/* Pagination */}
       <Pagination
         currentPage={currentPage}
