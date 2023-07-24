@@ -53,6 +53,12 @@ class PostStore {
     this.itemsPerPage = itemsPerPage;
   }
 
+  // Определение функций сравнения для столбцов
+  sortFunctions = {
+    title: (a, b) => a.title.localeCompare(b.title),
+    body: (a, b) => a.body.localeCompare(b.body),
+  };
+
   setSortBy(column) {
     // Если текущая сортировка совпадает с выбранным столбцом,
     // меняем направление сортировки на противоположное
@@ -77,6 +83,16 @@ class PostStore {
     console.log('searchTerm: ' + this.searchTerm)
   }
 
+  // Метод для получения функции сравнения для текущего столбца сортировки
+  getSortFunction() {
+    if (this.sortBy && this.sortBy in this.sortFunctions) {
+      return this.sortFunctions[this.sortBy];
+    }
+    // По умолчанию, если столбец сортировки не определен или не найден в sortFunctions,
+    // возвращаем функцию для сравнения чисел
+    return (a, b) => b[this.sortBy] - a[this.sortBy];
+  }
+
   get filteredAndSortedData() {
     const filteredData = this.posts.filter((post) => {
       if (this.searchTerm) {
@@ -87,19 +103,9 @@ class PostStore {
       return true;
     });
 
+    const sortFunction = this.getSortFunction();
     return filteredData.sort((a, b) => {
-      if (this.sortBy) {
-        let comparison = 0;
-        if (this.sortBy === 'title') {
-          comparison = a[this.sortBy].localeCompare(b[this.sortBy]);
-        } else if (this.sortBy === 'body') { // Исправляем сортировку по столбцу "Описание" (body)
-          comparison = a['body'].localeCompare(b['body']);
-        } else {
-          comparison = b[this.sortBy] - a[this.sortBy];
-        }
-        return this.sortDirection === 'asc' ? comparison : -comparison;
-      }
-      return 0;
+      return this.sortDirection === 'asc' ? sortFunction(a, b) : -sortFunction(a, b);
     });
   }
 
