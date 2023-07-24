@@ -3,6 +3,7 @@ import { action, computed, makeObservable, observable } from 'mobx';
 class PostStore {
   posts = [];
   currentPage = 1;
+  itemsPerPage = 10;
   sortBy = null;
   sortDirection = 'asc';
   searchTerm = '';
@@ -11,16 +12,19 @@ class PostStore {
     makeObservable(this, {
       posts: observable,
       currentPage: observable,
+      itemsPerPage: observable,
       sortBy: observable,
       sortDirection: observable,
       searchTerm: observable,
       setPosts: action,
       setCurrentPage: action,
+      setItemsPerPage: action,
       setSortBy: action,
       setSortDirection: action,
       setSearchTerm: action,
       filteredAndSortedData: computed,
       currentData: computed,
+      totalPages: computed,
     });
   }
 
@@ -30,6 +34,10 @@ class PostStore {
 
   setCurrentPage(page) {
     this.currentPage = page;
+  }
+
+  setItemsPerPage(itemsPerPage) {
+    this.itemsPerPage = itemsPerPage;
   }
 
   setSortBy(column) {
@@ -84,6 +92,10 @@ class PostStore {
     const startIndex = (this.currentPage - 1) * 10;
     const endIndex = startIndex + 10;
     return this.filteredAndSortedData.slice(startIndex, endIndex);
+  }
+
+  get totalPages() {
+    return Math.ceil(this.filteredAndSortedData.length / this.itemsPerPage);
   }
 }
 

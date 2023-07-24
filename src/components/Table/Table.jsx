@@ -4,7 +4,7 @@ import postStore from "../../stores/PostStore.js";
 import TableRow from "../TableRow/TableRow.jsx";
 
 const Table = observer(() => {
-  const { currentData, sortBy, sortDirection, searchTerm, setSearchTerm, setSortBy } = postStore;
+  const { currentData, sortBy, sortDirection, searchTerm, setSearchTerm, setSortBy, totalPages, currentPage, setCurrentPage } = postStore;
 
   const handleSortBy = (column) => {
     if (sortBy === column) {
@@ -17,6 +17,22 @@ const Table = observer(() => {
 
   const handleSearch = (event) => {
     postStore.setSearchTerm(event.target.value);
+  };
+
+  const handlePageChange = (page) => {
+    postStore.setCurrentPage(page);
+  };
+
+  const handlePrevPage = () => {
+    if (currentPage > 1) {
+      postStore.setCurrentPage(currentPage - 1);
+    }
+  };
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      postStore.setCurrentPage(currentPage + 1);
+    }
   };
 
   const getSortSymbol = (column) => {
@@ -59,6 +75,20 @@ const Table = observer(() => {
         ))}
         </tbody>
       </table>
+      {/* Pagination */}
+      <div className="pagination">
+        <button onClick={handlePrevPage}>Назад</button>
+        {Array.from({ length: totalPages }, (_, index) => (
+          <button
+            key={index + 1}
+            className={currentPage === index + 1 ? 'active' : ''}
+            onClick={() => handlePageChange(index + 1)}
+          >
+            {index + 1}
+          </button>
+        ))}
+        <button onClick={handleNextPage}>Далее</button>
+      </div>
     </>
   );
 });
