@@ -4,6 +4,7 @@ import postStore from "../../stores/PostStore.js";
 import TableRow from "../TableRow/TableRow.jsx";
 import './Table.css';
 import {useNavigate, useParams} from "react-router-dom";
+import Search from "../Search/Search.jsx";
 
 const Table = observer(() => {
   const { currentData, sortBy, sortDirection, searchTerm, setSearchTerm, setSortBy, totalPages, currentPage, setCurrentPage } = postStore;
@@ -29,8 +30,8 @@ const Table = observer(() => {
     handlePageChange(1)
   };
 
-  const handleSearch = (event) => {
-    postStore.setSearchTerm(event.target.value);
+  const handleSearch = (value) => {
+    postStore.setSearchTerm(value);
   };
 
   const handlePageChange = (page) => {
@@ -62,14 +63,7 @@ const Table = observer(() => {
 
   return (
     <>
-      <div className="search">
-        <input
-          type="text"
-          value={searchTerm}
-          onChange={handleSearch}
-          placeholder="Search"
-        />
-      </div>
+      <Search searchTerm={searchTerm} onSearch={handleSearch} />
       <table className="table">
         {/* Table header */}
         <thead>
