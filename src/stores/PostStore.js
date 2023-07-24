@@ -4,7 +4,7 @@ class PostStore {
   posts = [];
   currentPage = 1;
   sortBy = null;
-  sortDirection = 'asc'; // Добавлено поле для хранения направления сортировки
+  sortDirection = 'asc';
   searchTerm = '';
 
   constructor() {
@@ -12,12 +12,12 @@ class PostStore {
       posts: observable,
       currentPage: observable,
       sortBy: observable,
-      sortDirection: observable, // Обозначаем sortDirection как observable
+      sortDirection: observable,
       searchTerm: observable,
       setPosts: action,
       setCurrentPage: action,
       setSortBy: action,
-      setSortDirection: action, // Добавляем экшен для установки направления сортировки
+      setSortDirection: action,
       setSearchTerm: action,
       filteredAndSortedData: computed,
       currentData: computed,
@@ -53,11 +53,11 @@ class PostStore {
 
   setSearchTerm(term) {
     this.searchTerm = term;
+    console.log('searchTerm: ' + this.searchTerm)
   }
 
   get filteredAndSortedData() {
     const filteredData = this.posts.filter((post) => {
-      // Filter by search term
       if (this.searchTerm) {
         return Object.values(post).some((value) =>
           String(value).toLowerCase().includes(this.searchTerm.toLowerCase())
@@ -67,7 +67,6 @@ class PostStore {
     });
 
     return filteredData.sort((a, b) => {
-      // Sort by the selected column and direction
       if (this.sortBy) {
         let comparison = 0;
         if (this.sortBy === 'title') {

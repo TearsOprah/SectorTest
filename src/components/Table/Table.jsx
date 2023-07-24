@@ -4,7 +4,7 @@ import postStore from "../../stores/PostStore.js";
 import TableRow from "../TableRow/TableRow.jsx";
 
 const Table = observer(() => {
-  const { currentData, sortBy, sortDirection, setSearchTerm, setSortBy } = postStore;
+  const { currentData, sortBy, sortDirection, searchTerm, setSearchTerm, setSortBy } = postStore;
 
   const handleSortBy = (column) => {
     if (sortBy === column) {
@@ -13,6 +13,10 @@ const Table = observer(() => {
       postStore.setSortBy(column);
       postStore.setSortDirection('asc');
     }
+  };
+
+  const handleSearch = (event) => {
+    postStore.setSearchTerm(event.target.value);
   };
 
   const getSortSymbol = (column) => {
@@ -24,28 +28,38 @@ const Table = observer(() => {
   };
 
   return (
-    <table className="table">
-      {/* Table header */}
-      <thead>
-      <tr>
-        <th onClick={() => handleSortBy('id')}>
-          ID {getSortSymbol('id')}
-        </th>
-        <th onClick={() => handleSortBy('title')}>
-          Title {getSortSymbol('title')}
-        </th>
-        <th onClick={() => handleSortBy('body')}>
-          Описание {getSortSymbol('body')}
-        </th>
-      </tr>
-      </thead>
-      {/* Table body */}
-      <tbody>
-      {currentData.map((post) => (
-        <TableRow key={post.id} post={post} />
-      ))}
-      </tbody>
-    </table>
+    <>
+      <div className="search">
+        <input
+          type="text"
+          value={searchTerm}
+          onChange={handleSearch}
+          placeholder="Search"
+        />
+      </div>
+      <table className="table">
+        {/* Table header */}
+        <thead>
+        <tr>
+          <th onClick={() => handleSortBy('id')}>
+            ID {getSortSymbol('id')}
+          </th>
+          <th onClick={() => handleSortBy('title')}>
+            Title {getSortSymbol('title')}
+          </th>
+          <th onClick={() => handleSortBy('body')}>
+            Описание {getSortSymbol('body')}
+          </th>
+        </tr>
+        </thead>
+        {/* Table body */}
+        <tbody>
+        {currentData.map((post) => (
+          <TableRow key={post.id} post={post} />
+        ))}
+        </tbody>
+      </table>
+    </>
   );
 });
 
