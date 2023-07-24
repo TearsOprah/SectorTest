@@ -96,8 +96,9 @@ class PostStore {
   get filteredAndSortedData() {
     const filteredData = this.posts.filter((post) => {
       if (this.searchTerm) {
+        console.log(this.searchTerm)
         return Object.values(post).some((value) =>
-          String(value).toLowerCase().includes(this.searchTerm.toLowerCase())
+          String(value).replace(/[\n\r\s]/g, '').toLowerCase().includes(this.searchTerm.replace(/[\n\r\s]/g, '').toLowerCase())
         );
       }
       return true;

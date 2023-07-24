@@ -21,7 +21,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
 
   return (
     <div className="pagination">
-      <button className='page-nav-button hovered' onClick={handlePrevPage}>Назад</button>
+      {totalPages >= 1 ? <button className='page-nav-button hovered' onClick={handlePrevPage}>Назад</button> : ''}
       <div className='page-number-buttons-list'>
         {Array.from({ length: totalPages }, (_, index) => (
           <button
@@ -36,7 +36,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
           </button>
         ))}
       </div>
-      <button className='page-nav-button hovered' onClick={handleNextPage}>Далее</button>
+      {totalPages >= 1 ? <button className='page-nav-button hovered' onClick={handleNextPage}>Далее</button> : ''}
     </div>
   );
 };
