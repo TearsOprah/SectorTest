@@ -49,6 +49,10 @@ const Table = observer(() => {
     return <span>&darr;</span>;
   };
 
+  // Заполняем массив currentData пустыми объектами, чтобы всегда отображать 10 строк
+  const filledData = Array.from({ length: 10 }, (_, index) => currentData[index] || {});
+
+
   return (
     <>
       <Search searchTerm={searchTerm} onSearch={handleSearch} />
@@ -69,8 +73,8 @@ const Table = observer(() => {
         </thead>
         {/* Table body */}
         <tbody>
-        {currentData.map((post) => (
-          <TableRow key={post.id} post={post} />
+        {filledData.map((post, index) => (
+          <TableRow key={index} post={post} />
         ))}
         </tbody>
       </table>

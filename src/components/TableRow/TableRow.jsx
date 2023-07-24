@@ -1,8 +1,9 @@
 import React from 'react';
+import './TableRow.css';
 
 const TableRow = ({ post }) => {
   return (
-    <tr>
+    <tr className={'row'}>
       <td>{post.id}</td>
       <td>{post.title}</td>
       <td>{post.body}</td>
