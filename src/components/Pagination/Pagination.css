@@ -1,3 +1,37 @@
-.button_active {
-  background-color: greenyellow;
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  padding-left: 40px;
+  padding-right: 40px;
 }
+
+.page-nav-button {
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 137.687%;
+  background-color: transparent;
+  border: none;
+  color: var(--text-color-main);
+}
+
+.page-number-buttons-list {
+  display: flex;
+  gap: 10px;
+}
+
+.page-number-button {
+  font-size: 18px;
+  font-style: italic;
+  font-weight: 700;
+  line-height: 137.687%;
+  background-color: transparent;
+  border: none;
+  color: var(--text-color-main);
+}
+
+.button_active {
+  color: var(--text-color-accent);
+}
+
+
