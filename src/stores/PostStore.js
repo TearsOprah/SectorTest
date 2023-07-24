@@ -70,17 +70,14 @@ class PostStore {
       this.sortBy = column;
       this.setSortDirection('asc');
     }
-    console.log('sort by ' + column)
   }
 
   setSortDirection(direction) {
     this.sortDirection = direction;
-    console.log(this.sortDirection)
   }
 
   setSearchTerm(term) {
     this.searchTerm = term;
-    console.log('searchTerm: ' + this.searchTerm)
   }
 
   // Метод для получения функции сравнения для текущего столбца сортировки
@@ -96,7 +93,6 @@ class PostStore {
   get filteredAndSortedData() {
     const filteredData = this.posts.filter((post) => {
       if (this.searchTerm) {
-        console.log(this.searchTerm)
         return Object.values(post).some((value) =>
           String(value).replace(/[\n\r\s]/g, '').toLowerCase().includes(this.searchTerm.replace(/[\n\r\s]/g, '').toLowerCase())
         );

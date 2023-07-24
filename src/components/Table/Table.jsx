@@ -13,8 +13,6 @@ const Table = observer(() => {
   const { page } = useParams();
   const navigate = useNavigate();
 
-  console.log(currentPage)
-
   useEffect(() => {
     // Устанавливаем текущую страницу из параметра page при первоначальной загрузке компонента
     const pageNumber = parseInt(page) || 1;
