@@ -26,6 +26,7 @@ const Table = observer(() => {
       postStore.setSortBy(column);
       postStore.setSortDirection('asc');
     }
+    handlePageChange(1)
   };
 
   const handleSearch = (event) => {
