@@ -4,10 +4,23 @@ import postStore from "../../stores/PostStore.js";
 import TableRow from "../TableRow/TableRow.jsx";
 
 const Table = observer(() => {
-  const { currentData, sortBy, setSearchTerm, setSortBy } = postStore;
+  const { currentData, sortBy, sortDirection, setSearchTerm, setSortBy } = postStore;
 
   const handleSortBy = (column) => {
-    postStore.setSortBy(column);
+    if (sortBy === column) {
+      postStore.setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc');
+    } else {
+      postStore.setSortBy(column);
+      postStore.setSortDirection('asc');
+    }
+  };
+
+  const getSortSymbol = (column) => {
+    if (sortBy === column) {
+      return sortDirection === 'asc' ? <span>&uarr;</span> : <span>&darr;</span>;
+    }
+    // Если sortBy не определено, считаем, что сортировка по этому столбцу не выбрана, и отображаем стрелку вниз.
+    return <span>&darr;</span>;
   };
 
   return (
@@ -16,13 +29,13 @@ const Table = observer(() => {
       <thead>
       <tr>
         <th onClick={() => handleSortBy('id')}>
-          ID {sortBy === 'id' && <span>&darr;</span>}
+          ID {getSortSymbol('id')}
         </th>
         <th onClick={() => handleSortBy('title')}>
-          Title {sortBy === 'title' && <span>&darr;</span>}
+          Title {getSortSymbol('title')}
         </th>
         <th onClick={() => handleSortBy('body')}>
-          Описание {sortBy === 'body' && <span>&darr;</span>}
+          Описание {getSortSymbol('body')}
         </th>
       </tr>
       </thead>
