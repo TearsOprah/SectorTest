@@ -21,12 +21,20 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
 
   return (
     <div className="pagination">
-      {totalPages >= 1 ? <button className='page-nav-button hovered' onClick={handlePrevPage}>Назад</button> : ''}
-      <div className='page-number-buttons-list'>
+      {totalPages >= 1 ? (
+        <button className="page-nav-button hovered" onClick={handlePrevPage}>
+          Назад
+        </button>
+      ) : (
+        ''
+      )}
+      <div className="page-number-buttons-list">
         {Array.from({ length: totalPages }, (_, index) => (
           <button
             key={index + 1}
-            className={`page-number-button hovered ${currentPage === index + 1 ? 'button_active' : ''}`}
+            className={`page-number-button hovered ${
+              currentPage === index + 1 ? 'button_active' : ''
+            }`}
             onClick={() => {
               onPageChange(index + 1);
               navigate(`/page/${index + 1}`); // Обновляем адрес при переключении страницы
@@ -36,7 +44,13 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
           </button>
         ))}
       </div>
-      {totalPages >= 1 ? <button className='page-nav-button hovered' onClick={handleNextPage}>Далее</button> : ''}
+      {totalPages >= 1 ? (
+        <button className="page-nav-button hovered" onClick={handleNextPage}>
+          Далее
+        </button>
+      ) : (
+        ''
+      )}
     </div>
   );
 };

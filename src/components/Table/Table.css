@@ -12,7 +12,6 @@
 }
 
 .table__header-column {
-
 }
 
 .header-id {
@@ -29,12 +28,12 @@
 
 .arrow {
   margin-bottom: 2px;
-  background: url("../../assets/arrow-icon.svg") no-repeat center;
+  background: url('../../assets/arrow-icon.svg') no-repeat center;
   width: 12px;
   height: 6px;
   display: inline-block;
   margin-left: 30px;
-  transition: all .5s;
+  transition: all 0.5s;
 }
 
 .table__body {

@@ -1,7 +1,7 @@
 import React from 'react';
-import {Navigate, Route, Routes} from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import Table from '../Table/Table';
-import './App.css'
+import './App.css';
 
 const App = () => {
   return (

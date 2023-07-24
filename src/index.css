@@ -8,19 +8,16 @@
 
   /*colors*/
   --text-color-main: #474955;
-  --text-color-secondary: #FFFFFF;
-  --text-color-accent: #7EBC3C;
+  --text-color-secondary: #ffffff;
+  --text-color-accent: #7ebc3c;
 
-
-  --text-color-search: #B2B7BF;
-  --text-color-sort: #FCFCFC;
-
+  --text-color-search: #b2b7bf;
+  --text-color-sort: #fcfcfc;
 
   --bg-color-primary: #474955;
-  --bg-color-secondary: #5A5C66;
+  --bg-color-secondary: #5a5c66;
 
-
-  --border-color-table: #E3E6EC
+  --border-color-table: #e3e6ec;
 }
 
 * {
@@ -35,11 +32,10 @@ body {
 }
 
 .hovered {
-  transition: all .5s;
+  transition: all 0.5s;
 }
 
 .hovered:hover {
   cursor: pointer;
-  opacity: .8;
+  opacity: 0.8;
 }
-
