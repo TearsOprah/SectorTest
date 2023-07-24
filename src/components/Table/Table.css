@@ -1,3 +1,46 @@
 .table {
+  border-collapse: collapse;
+  margin-top: 15px;
+  margin-bottom: 16px;
+}
 
+.table__header {
+  background-color: var(--bg-color-primary);
+  color: var(--text-color-secondary);
+  border: 1px solid var(--bg-color-primary);
+  height: 54px;
+}
+
+.table__header-column {
+
+}
+
+.header-id {
+  width: 110px;
+}
+
+.header-title {
+  width: 530px;
+}
+
+.header-body {
+  width: 430px;
+}
+
+.arrow {
+  margin-bottom: 2px;
+  background: url("../../assets/arrow-icon.svg") no-repeat center;
+  width: 12px;
+  height: 6px;
+  display: inline-block;
+  margin-left: 30px;
+  transition: all .5s;
+}
+
+.table__body {
+  border: 1px solid var(--border-color-table);
+}
+
+.arrow_reverse {
+  transform: rotateX(180deg);
 }

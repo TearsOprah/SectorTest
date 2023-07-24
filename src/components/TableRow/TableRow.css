@@ -1,3 +1,13 @@
 .row {
   height: 56px;
 }
+
+.row__sector {
+  border: 1px solid var(--border-color-table);
+  text-align: start;
+  padding: 11px 15px;
+}
+
+.row__sector-id {
+  text-align: center;
+}

@@ -18,12 +18,20 @@
 
   --bg-color-primary: #474955;
   --bg-color-secondary: #5A5C66;
+
+
+  --border-color-table: #E3E6EC
 }
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+body {
+  max-width: 1080px;
+  margin: 23px auto 12px;
 }
 
 

@@ -43,10 +43,10 @@ const Table = observer(() => {
 
   const getSortSymbol = (column) => {
     if (sortBy === column) {
-      return sortDirection === 'asc' ? <span>&uarr;</span> : <span>&darr;</span>;
+      return sortDirection === 'asc' ? <span className="arrow arrow_reverse"></span> : <span className="arrow"></span>;
     }
     // Если sortBy не определено, считаем, что сортировка по этому столбцу не выбрана, и отображаем стрелку вниз.
-    return <span>&darr;</span>;
+    return <span className="arrow"></span>;
   };
 
   // Заполняем массив currentData пустыми объектами, чтобы всегда отображать 10 строк
@@ -59,20 +59,20 @@ const Table = observer(() => {
       <table className="table">
         {/* Table header */}
         <thead>
-        <tr>
-          <th onClick={() => handleSortBy('id')}>
+        <tr className="table__header">
+          <th className="table__header-column header-id" onClick={() => handleSortBy('id')}>
             ID {getSortSymbol('id')}
           </th>
-          <th onClick={() => handleSortBy('title')}>
-            Title {getSortSymbol('title')}
+          <th className="table__header-column header-title" onClick={() => handleSortBy('title')}>
+            Заголовок {getSortSymbol('title')}
           </th>
-          <th onClick={() => handleSortBy('body')}>
+          <th className="table__header-column header-body" onClick={() => handleSortBy('body')}>
             Описание {getSortSymbol('body')}
           </th>
         </tr>
         </thead>
         {/* Table body */}
-        <tbody>
+        <tbody className='table__body'>
         {filledData.map((post, index) => (
           <TableRow key={index} post={post} />
         ))}
